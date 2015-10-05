@@ -8,19 +8,17 @@ import java.net.UnknownHostException;
 public class Cliente {
 	public static void main(String[] args) throws IOException {
 
-        String serverHostname = new String ("127.0.0.1");
+        String serverHostname = new String ("190.157.13.155");
 
-        if (args.length > 0)
-           serverHostname = args[0];
-        System.out.println ("Attemping to connect to host " +
-		serverHostname + " on port 10007.");
+        System.out.println ("Host " +
+		serverHostname + " Puerto: 10007.");
 
         Socket echoSocket = null;
         PrintWriter out = null;
         BufferedReader in = null;
 
         try {
-            // echoSocket = new Socket("taranis", 7);
+            
             echoSocket = new Socket(serverHostname, 10007);
             out = new PrintWriter(echoSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(
@@ -40,8 +38,11 @@ public class Cliente {
 
         System.out.print ("input: ");
 	while ((userInput = stdIn.readLine()) != null) {
-	    out.println(userInput);
-	    System.out.println("echo: " + in.readLine());
+	    out.println("client "+userInput);
+	    int tam=((userInput.split(" ").length)+1)/2;
+	    for(int i=0;i<tam;i++){
+	    System.out.println( in.readLine());
+	    }
             System.out.print ("input: ");
 	}
 
